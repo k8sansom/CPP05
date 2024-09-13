@@ -14,18 +14,24 @@ int main() {
         bob.decrementGrade();
         std::cout << "After decrementing twice: " << bob << std::endl;  // Expected: Bob, bureaucrat grade 3
 
-        // Test invalid grade (too high)
-        Bureaucrat alice(0, "Alice");  // This will throw GradeTooHighException
+        bob.incrementGrade();
+        bob.incrementGrade();
+        bob.incrementGrade(); //this should be too high
     } catch (std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cerr << "After incrementing three times: " << e.what() << std::endl;
     }
 
+    try {
+        // Test invalid grade (too high)
+        Bureaucrat alice(-1, "Alice");  // This will throw GradeTooHighException
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
     try {
         // Test invalid grade (too low)
         Bureaucrat jane(151, "Jane");  // This will throw GradeTooLowException
     } catch (std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
-
     return 0;
 }
