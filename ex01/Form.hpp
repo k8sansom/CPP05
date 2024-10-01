@@ -7,8 +7,20 @@ class Form {
         Form( const Form &copy);
         Form& operator=( const Form &src);
 
+		//getters
         int getSignGrade();
         int getExGrade();
+
+		void beSigned(Bureaucrat& Bureaucrat);
+
+		class GradeTooHighException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
     
     private:
         const std::string   _name;
