@@ -10,7 +10,7 @@ class Bureaucrat {
     public:
 		//OCF
 		//Bureaucrat();
-		Bureaucrat(int grade, const std::string &name);
+		Bureaucrat(const std::string &name, int grade);
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &copy);
 		Bureaucrat& operator=(const Bureaucrat& src);
