@@ -10,9 +10,9 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 
 Bureaucrat::Bureaucrat(int grade, const std::string &name) : _grade(grade), _name(name) {
 	if (grade < 1) {
-		throw Bureaucrat::GradeTooHighException();
+		throw GradeTooHighException();
 	} else if (grade > 150) {
-		throw Bureaucrat::GradeTooLowException();
+		throw GradeTooLowException();
 	}
 }
 
@@ -38,14 +38,14 @@ int	Bureaucrat::getGrade() const {
 
 void	Bureaucrat::incrementGrade() {
 	if (_grade - 1 < 1) {
-		throw Bureaucrat::GradeTooHighException();
+		throw GradeTooHighException();
 	}
 	_grade--;
 }
 
 void	Bureaucrat::decrementGrade() {
 	if (_grade + 1 > 150) {
-		throw Bureaucrat::GradeTooLowException();
+		throw GradeTooLowException();
 	}
 	_grade++;
 }
