@@ -12,8 +12,7 @@ const char *AForm::NotSignedException:: what() const throw() {
 	return ("Form not signed"); 
 }
 
-AForm::AForm(const std::string& name, const int signGrade, const int exGrade ):_name(name), _signGrade(signGrade), _exGrade(exGrade) {
-	_isSigned = false;
+AForm::AForm(const std::string& name, const int signGrade, const int exGrade ):_name(name), _signGrade(signGrade), _exGrade(exGrade), _isSigned(0) {
 	if (signGrade < 1 || exGrade < 1) {
 		throw GradeTooHighException();
 	} else if (signGrade > 150 || exGrade > 150) {

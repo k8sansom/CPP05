@@ -15,11 +15,18 @@ void	ShrubberyCreationForm::execution() const {
 			return;
 		}
 
-        file << "     ()()()()" << std::endl;
-        file << "  ()()()()()()()" << std::endl;
-        file << "()()()()()()()()()" << std::endl;
-        file << "    (((())))" << std::endl;
-        file << "     ((()))" << std::endl;
-        file << "      \\/" << std::endl;
+        file << "       ,.," << std::endl;
+      	file << "      MMMM_    ,..," << std::endl;
+        file << "        \"_ \"__\"MMMMM          ,...,," << std::endl;
+ 		file << " ,..., __.\" --\"    ,.,     _-\"MMMMMMM" << std::endl;
+		file << "MMMMMM\"___ \"_._   MMM\"_.\"\" _ \"\"\"\"\"\"" <<std::endl;
+ 		file << " \"\"\"\"\"    \"\" , \\_.   \"_. .\"" << std::endl;
+        file << "        ,., _\"__ \\__./ .\"" << std::endl;
+    	file << "       MMMMM_\"  \"_    ./" << std::endl;
+		file << "        ''''      (    )" << std::endl;
+		file << " ._______________.-'____\"---._." << std::endl;
+		file << "  \\                          /" << std::endl;
+		file << "   \\________________________/" << std::endl;
+		file << "   (_)                    (_)" << std::endl;
         file.close();
 }

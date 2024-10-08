@@ -8,8 +8,7 @@ const char *Form::GradeTooLowException::what() const throw() {
 	return ("Grade too low!");
 }
 
-Form::Form(const std::string& name, const int signGrade, const int exGrade ):_name(name), _signGrade(signGrade), _exGrade(exGrade) {
-	_isSigned = false;
+Form::Form(const std::string& name, const int signGrade, const int exGrade ):_name(name), _signGrade(signGrade), _exGrade(exGrade), _isSigned(0) {
 	if (signGrade < 1 || exGrade < 1) {
 		throw GradeTooHighException();
 	} else if (signGrade > 150 || exGrade > 150) {

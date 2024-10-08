@@ -6,7 +6,6 @@
 class Bureaucrat {
     public:
 		//OCF
-		//Bureaucrat();
 		Bureaucrat(int grade, const std::string &name);
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &copy);
