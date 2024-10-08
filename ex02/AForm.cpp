@@ -55,6 +55,17 @@ void AForm::beSigned(Bureaucrat& Bureaucrat) {
 	}
 }
 
+void	AForm::execute(Bureaucrat const & executor) const {
+	if (executor.getGrade() > _exGrade) {
+		throw AForm::GradeTooLowException();
+	}
+	if (!_isSigned) {
+		throw AForm::NotSignedException();
+	}
+	execution();
+	std::cout << executor.getName() << " executed " << _name << std::endl;
+}
+
 std::ostream& operator<<(std::ostream& o, AForm& f) {
 	o	<< f.getName() 
 		<< " AForm with sign grade: " << f.getSignGrade() 

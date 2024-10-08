@@ -1,50 +1,70 @@
-#include <iostream>
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+// #include "RobotomyRequestForm.hpp"
+// #include "PresidentialPardonForm.hpp"
 
 int main() {
-		// Create Bureaucrats with invalid grades
-		try {
-            Bureaucrat invalidBureaucrat("InvalidBureaucrat", 0);  // Grade too high
-        } catch (std::exception &e) {
-            std::cerr << "Bureaucrat is invalid because " << e.what() << std::endl;
-        }
-        try {
-            Bureaucrat anotherInvalidBureaucrat("AnotherInvalidBureaucrat", 200);  // Grade too low
-        } catch (std::exception &e) {
-            std::cerr << "Bureaucrat is invalid because " << e.what() << std::endl;
-        }
-		// Create invalid AForms
-		try {
-            AAForm invalidAForm("InvalidForm", 0, 100);  // Sign grade too high (invalid)
-        } catch (std::exception &e) {
-            std::cerr << "AForm is invalid because " << e.what() << std::endl;
-        }
-        try {
-            AForm anotherInvalidAForm("AnotherInvalidAForm", 151, 100);  // Sign grade too low (invalid)
-        } catch (std::exception &e) {
-            std::cerr << "AForm is invalid because " << e.what() << std::endl;
-        }
-				// Create Bureaucrats with different grades
-        Bureaucrat alice("Alice", 50);
-        Bureaucrat bob("Bob", 5);
-        Bureaucrat charlie("Charlie", 150); // Lowest possible grade
-        // Create AForms with different signing and execution grades
-        AForm AFormA("AFormA", 60, 100);
-        AAForm AFormB("AFormB", 10, 50);
-        AForm AFormC("AAFormC", 150, 150); // Easiest AForm to sign
-        // Display the AForm inAFormation
-        std::cout << AFormA << std::endl;
-        std::cout << AFormB << std::endl;
-        std::cout << AFormC << std::endl;
+    // Test ShrubberyCreationForm
+    try {
+        Bureaucrat alice("Alice", 137);
+		Bureaucrat	mike("Mike", 145);  // Alice's grade is 137
+        ShrubberyCreationForm shrubbery("garden");
 
-        // Test signing AForms with different Bureaucrats
-        bob.signAForm(AFormA);      // Bob has grade 5, should sign successfully
-        alice.signAForm(AFormA);    // Alice has grade 50, should also sign successfully
-        charlie.signAForm(AFormC);  // Charlie has grade 150, can sign the easiest AForm
+        // Trying to execute without signing the form
+        alice.executeForm(shrubbery);  // Should throw "Form is not signed."
 
-        charlie.signAForm(AFormA);  // Charlie cannot sign (grade too low for AFormA)
-        alice.signAForm(AFormB);    // Alice cannot sign (grade too low for AFormB
+        // Sign the form
+        shrubbery.beSigned(alice);     // Alice has sufficient grade to sign the form (145 required)
+        alice.executeForm(shrubbery);  // Alice has enough grade to execute (137 required)
+		mike.executeForm(shrubbery);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    // // Test RobotomyRequestForm
+    // try {
+    //     std::cout << "\n---- Testing RobotomyRequestForm ----" << std::endl;
+    //     Bureaucrat bob("Bob", 50);  // Bob's grade is 50
+    //     RobotomyRequestForm robotomy("Wall-E");
+
+    //     // Sign and execute the form
+    //     robotomy.beSigned(bob);     // Bob has sufficient grade to sign the form (72 required)
+    //     bob.executeForm(robotomy);  // Bob has enough grade to execute (45 required)
+
+    //     std::cout << "---- RobotomyRequestForm executed ----" << std::endl;
+    // } catch (const std::exception &e) {
+    //     std::cerr << e.what() << std::endl;
+    // }
+
+    // // Test PresidentialPardonForm
+    // try {
+    //     std::cout << "\n---- Testing PresidentialPardonForm ----" << std::endl;
+    //     Bureaucrat president("President", 1);  // President's grade is 1
+    //     PresidentialPardonForm pardon("Ford Prefect");
+
+    //     // Sign and execute the form
+    //     pardon.beSigned(president);     // President has sufficient grade to sign the form (25 required)
+    //     president.executeForm(pardon);  // President has enough grade to execute (5 required)
+
+    //     std::cout << "---- PresidentialPardonForm executed successfully ----" << std::endl;
+    // } catch (const std::exception &e) {
+    //     std::cerr << e.what() << std::endl;
+    // }
+
+    // // Test a failure case due to insufficient execution grade
+    // try {
+    //     std::cout << "\n---- Testing form execution failure due to grade ----" << std::endl;
+    //     Bureaucrat lowGradeBureaucrat("LowGradeBureaucrat", 150);  // Grade too low to execute any form
+    //     ShrubberyCreationForm lowGradeShrubbery("backyard");
+
+    //     // Sign the form
+    //     lowGradeShrubbery.beSigned(lowGradeBureaucrat);  // Can sign, as signing grade is 145
+
+    //     // Attempt to execute the form, should fail
+    //     lowGradeBureaucrat.executeForm(lowGradeShrubbery);  // Should throw "Bureaucrat's grade is too low to execute the form."
+    // } catch (const std::exception &e) {
+    //     std::cerr << e.what() << std::endl;
+    // }
 
     return 0;
 }

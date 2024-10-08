@@ -4,7 +4,8 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = 	Bureaucrat.cpp \
 		AForm.cpp \
-		main.cpp
+		main.cpp \
+		ShrubberyCreationForm.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

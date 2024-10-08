@@ -1,12 +1,17 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target): _target(target), AForm("Shrubbery Creation Form", 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): _target(target), AForm("Shrubbery Creation Form", 145, 137) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy): _target(copy._target), AForm(copy) {}
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& src) = delete;
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& src) {
+	if (this != &src) {
+		_target = src._target;
+	}
+	return *this;
+}
 
 void	ShrubberyCreationForm::execution() const {
 	 std::ofstream file((this->_target + "_shrubbery").c_str());
