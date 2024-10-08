@@ -1,13 +1,14 @@
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
-// #include "RobotomyRequestForm.hpp"
-// #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main() {
     // Test ShrubberyCreationForm
+	std::cout << "Testing Shrubbery Creation Form" << std::endl;
     try {
         Bureaucrat alice("Alice", 137);
-		Bureaucrat	mike("Mike", 145);  // Alice's grade is 137
+		Bureaucrat	mike("Mike", 145);
         ShrubberyCreationForm shrubbery("garden");
 
         // Trying to execute without signing the form
@@ -16,55 +17,46 @@ int main() {
         // Sign the form
         shrubbery.beSigned(alice);     // Alice has sufficient grade to sign the form (145 required)
         alice.executeForm(shrubbery);  // Alice has enough grade to execute (137 required)
-		mike.executeForm(shrubbery);
+		mike.executeForm(shrubbery); // grade should be too low
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 
-    // // Test RobotomyRequestForm
-    // try {
-    //     std::cout << "\n---- Testing RobotomyRequestForm ----" << std::endl;
-    //     Bureaucrat bob("Bob", 50);  // Bob's grade is 50
-    //     RobotomyRequestForm robotomy("Wall-E");
+	std::cout << std::endl;
 
-    //     // Sign and execute the form
-    //     robotomy.beSigned(bob);     // Bob has sufficient grade to sign the form (72 required)
-    //     bob.executeForm(robotomy);  // Bob has enough grade to execute (45 required)
+    // Test RobotomyRequestForm
+	std::cout << "Testing Robotomy Request Form" << std::endl;
+    try {
+		Bureaucrat bob("Bob", 42);  // Bob's grade is 50
+		Bureaucrat kate("Kate", 120);
+		RobotomyRequestForm robotomy("Wall-E");
 
-    //     std::cout << "---- RobotomyRequestForm executed ----" << std::endl;
-    // } catch (const std::exception &e) {
-    //     std::cerr << e.what() << std::endl;
-    // }
+		// Sign and execute the form
+		// robotomy.beSigned(kate);
+		robotomy.beSigned(bob);   // should work
+		bob.executeForm(robotomy);  // should work but 50% robotomy fails
+		bob.executeForm(robotomy);  // should work but 50% robotomy fails
+		bob.executeForm(robotomy);  // should work but 50% robotomy fails
+		kate.executeForm(robotomy); // Should fail because grade too low
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+	std::cout << std::endl;
+    // Test PresidentialPardonForm
+	std::cout << "Testing Presidential Pardon Form" << std::endl;
+    try {
+        Bureaucrat donald("Donald", 1);  // President's grade is 1
+		Bureaucrat	kamala("Kamala", 7);
+        PresidentialPardonForm pardon("Ford Prefect");
 
-    // // Test PresidentialPardonForm
-    // try {
-    //     std::cout << "\n---- Testing PresidentialPardonForm ----" << std::endl;
-    //     Bureaucrat president("President", 1);  // President's grade is 1
-    //     PresidentialPardonForm pardon("Ford Prefect");
-
-    //     // Sign and execute the form
-    //     pardon.beSigned(president);     // President has sufficient grade to sign the form (25 required)
-    //     president.executeForm(pardon);  // President has enough grade to execute (5 required)
-
-    //     std::cout << "---- PresidentialPardonForm executed successfully ----" << std::endl;
-    // } catch (const std::exception &e) {
-    //     std::cerr << e.what() << std::endl;
-    // }
-
-    // // Test a failure case due to insufficient execution grade
-    // try {
-    //     std::cout << "\n---- Testing form execution failure due to grade ----" << std::endl;
-    //     Bureaucrat lowGradeBureaucrat("LowGradeBureaucrat", 150);  // Grade too low to execute any form
-    //     ShrubberyCreationForm lowGradeShrubbery("backyard");
-
-    //     // Sign the form
-    //     lowGradeShrubbery.beSigned(lowGradeBureaucrat);  // Can sign, as signing grade is 145
-
-    //     // Attempt to execute the form, should fail
-    //     lowGradeBureaucrat.executeForm(lowGradeShrubbery);  // Should throw "Bureaucrat's grade is too low to execute the form."
-    // } catch (const std::exception &e) {
-    //     std::cerr << e.what() << std::endl;
-    // }
+        // Sign and execute the form
+        donald.executeForm(pardon);  // can't execute bc not signed
+		pardon.beSigned(kamala);     // can sign
+		kamala.executeForm(pardon);  //can't execute
+		donald.executeForm(pardon);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
     return 0;
 }

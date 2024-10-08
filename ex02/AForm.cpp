@@ -63,7 +63,6 @@ void	AForm::execute(Bureaucrat const & executor) const {
 		throw AForm::NotSignedException();
 	}
 	execution();
-	std::cout << executor.getName() << " executed " << _name << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& o, AForm& f) {
