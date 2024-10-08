@@ -1,4 +1,5 @@
 #include "ShrubberyCreationForm.hpp"
+ShrubberyCreationForm::ShrubberyCreationForm(): _target("none"), AForm("Shrubbery Creation Form", 145, 137) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target): _target(target), AForm("Shrubbery Creation Form", 145, 137) {}
 

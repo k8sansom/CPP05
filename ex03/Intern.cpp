@@ -1,10 +1,6 @@
 #include "Intern.hpp"
 
-Intern::Intern() {
-	_forms[0] = new ShrubberyCreationForm();
-    _forms[1] = new RobotomyRequestForm();
-    _forms[2] = new PresidentialPardonForm();
-}
+Intern::Intern() {}
 
 Intern::Intern(const Intern& copy) {
 	*this = copy;
@@ -17,18 +13,30 @@ Intern& Intern::operator=(const Intern& src) {
 
 Intern::~Intern() {}
 
-AForm* Intern::makeForm(const std::string &formName, const std::string &target) {
-    struct FormPair {
-        std::string name;
-        AForm* (*createForm)(const std::string &target);
-    };
+const char * Intern::FormNotFound::what() const throw() 
+{
+    return ("Form Not Found");
+}
 
-	FormPair formPairs[3] = {
-        {"shrubbery creation", [](const std::string &target) { return new ShrubberyCreationForm(target); }},
-        {"robotomy request", [](const std::string &target) { return new RobotomyRequestForm(target); }},
-        {"presidential pardon", [](const std::string &target) { return new PresidentialPardonForm(target); }},
-    };
-	for (int i = 0; i < 3; i++) {
+AForm*   Intern::makeForm( std::string name, std::string target ) {
 
-	}
+    std::string formNames[] = {
+        "robotomy request",
+        "presidential pardon",
+        "shrubbery creation"
+    };
+    AForm*    forms[] = {
+        new RobotomyRequestForm( target ),
+        new PresidentialPardonForm( target ),
+        new ShrubberyCreationForm( target )
+    };
+    
+    for ( int i(0); i < 3; i++ ) {
+        if ( name == formNames[i] ) {
+            std::cout << "Intern creates " << name << std::endl;
+            return forms[i];
+        }
+    }
+    std::cout << "Intern cannot create " << name << " form" << std::endl;
+    return nullptr;
 }
