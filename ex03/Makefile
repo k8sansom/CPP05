@@ -4,6 +4,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = 	Bureaucrat.cpp \
 		AForm.cpp \
+		Intern.cpp \
 		main.cpp \
 		PresidentialPardonForm.cpp \
 		ShrubberyCreationForm.cpp \
